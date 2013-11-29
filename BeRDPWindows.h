@@ -19,6 +19,19 @@ class GeneralView;
 class DisplayView;
 class AboutView;
 
+/* Predefs -- so we don't have to include them here */
+class BTabView;
+class BTab;
+class BButton;
+class BCheckBox;
+class BSlider;
+class BTextControl;
+class BStringView;
+class BTextView;
+class BMenuField;
+class BMenu;
+class BMenuItem;
+
 class BeRDPWindow : public BWindow
 {
 	public:
