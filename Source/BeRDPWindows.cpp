@@ -475,17 +475,17 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				{
 					case 0:
 						{
-							cmdline.Append("-g640x480 ");
+							cmdline.Append("-g 640x480 ");
 						}
 						break;
 					case 1:
 						{
-							cmdline.Append("-g800x600 ");
+							cmdline.Append("-g 800x600 ");
 						}
 						break;
 					case 2:
 						{
-							cmdline.Append("-g1024x768 ");
+							cmdline.Append("-g 1024x768 ");
 						}
 						break;
 					case 3:
