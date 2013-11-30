@@ -203,9 +203,9 @@ void BeRDPWindow::InitWindow(void)
     float fLeftMargin = 8;
     float fRightMargin = 310;
     float fDescTop = 60;
-    stvTitle = new BStringView(BRect (fLeftMargin,10,fRightMargin,25), "BeRDP", "BeRDP - BeOS Remote Desktop Client",
+    stvTitle = new BStringView(BRect (fLeftMargin,10,fRightMargin,25), "BeRDP", "BeRDP v0.5",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
-    stvAuthor1 = new BStringView(BRect (fLeftMargin,30,fRightMargin,45), "Author 1", "Coded by Sikosis",
+    stvAuthor1 = new BStringView(BRect (fLeftMargin,30,fRightMargin,45), "Author 1", "(C) 2003-2004 Sikosis",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
       				
     
@@ -217,7 +217,7 @@ void BeRDPWindow::InitWindow(void)
 	txvDescription->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	txvDescription->Insert("BeRDP is a GUI for RDesktop, which is used to connect to Microsoft Remote Desktop Protocol servers.\n");
       				
-    stvURL = new BStringView(BRect (fLeftMargin,153,r.right,168), "URL", "Website: https://github.com/HaikuArchives/BeRDP",
+    stvURL = new BStringView(BRect (fLeftMargin,153,r.right,168), "URL", "Website: github.com/HaikuArchives/BeRDP",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
     ptrAboutView->AddChild(stvAuthor1);
     ptrAboutView->AddChild(stvTitle);
@@ -237,7 +237,7 @@ void BeRDPWindow::InitWindow(void)
 	tab->SetLabel("Display");
 	tab = new BTab();
 	tabView->AddTab(ptrAboutView, tab);
-	tab->SetLabel("About BeRDP");
+	tab->SetLabel("About");
 	
 	// Create the Views
 	AddChild(ptrBeRDPView = new BeRDPView(r));
