@@ -2,17 +2,17 @@ resource app_signature "application/x-vnd.BeRDP";
 
 resource app_version {
 	major  = 0,
-	middle = 0,
-	minor  = 16777216,
+	middle = 5,
+	minor  = 0,
 
 	variety = B_APPV_DEVELOPMENT,
 	internal = 0,
 
 	short_info = "BeRDP",
-	long_info = "GUI Front End for rdesktop / xwin (at present)"
+	long_info = "GUI for RDesktop."
 };
 
-resource app_flags B_SINGLE_LAUNCH;
+resource app_flags B_MULTIPLE_LAUNCH;
 
 resource mini_icon array {
 	$"FFFF0000FFFF0000FFFFFFFFFFFFFFFF"
