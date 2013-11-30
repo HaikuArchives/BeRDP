@@ -19,7 +19,7 @@ SRCS= BeRDP.cpp BeRDPWindows.cpp BeRDPViews.cpp
 # end of srcs
 
 #	specify the resource files to use
-RSRCS= BeRDP.rsrc
+RDEFS= BeRDP.rdef
 
 #	specify additional libraries to link against
 LIBS= be root
