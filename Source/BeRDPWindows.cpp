@@ -59,7 +59,7 @@ static void CenterWindowOnScreen(BWindow* w)
 // -------------------------------------------------------------------------------------------------- //
 
 // BeRDPWindow - Constructor
-BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP v0.5", B_TITLED_WINDOW, B_NORMAL_WINDOW_FEEL , 0)
+BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP", B_TITLED_WINDOW, B_NORMAL_WINDOW_FEEL , 0)
 {
 	InitWindow();
 	CenterWindowOnScreen(this);
