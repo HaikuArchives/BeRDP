@@ -469,11 +469,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				SaveConnectionList();
 				SaveSettings(cnxname.String());
 				
-				// Remove the Script (as we no longer need it)
-				char tmp[256];
-				sprintf(tmp,"rm -r %s/berdp.sh","/boot/home");
-				system(tmp);
-				
 				BString cmdline;
 				cmdline.SetTo("rdesktop ");
 				switch (sldDisplaySize->Value())
@@ -502,7 +497,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				
 				BString tmpUsername;
 				tmpUsername.SetTo(txtUsername->Text());
-				
 				if (tmpUsername.CountChars() > 0) {
 					cmdline.Append("-u");
 					cmdline.Append(txtUsername->Text());
@@ -516,39 +510,12 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				}
 				cmdline.Append(txtComputer->Text());
 				printf("%s\n\n",cmdline.String());
-				
-				// hold up wait a minute ...
-				//
-				// thx to some version fine work by mmu_man or tha man as i like to call him ;)
-				// has released a native beos rdesktop - so we're removing 
-				// all other options except for native.
-		
-				// Create our Script and Launch rdesktop with our params
-				int x;
-				FILE *f;
-				char FileName[256];
-				
-				sprintf(FileName,"%s/berdp.sh","/boot/home");
-				f = fopen(FileName,"w");
-				x = fputs("#!/bin/sh\n\n",f);
-				x = fputs("# BeRDP Connect String\n",f);
-				x = fputs("# Coded by Sikosis\n",f);
-				x = fputs("# Native RDesktop Command Line by mmu_man\n\n",f);
-				x = fputs("# RDesktop Command Line Options\n",f);
-				sprintf(tmp,"RDTP=\"%s\"\n\n",cmdline.String());
-				x = fputs(tmp,f);
-				x = fputs("$RDTP\n\n",f);
-				fclose(f);
-				
+
 				// Minimize the Window
 				Minimize(true);
 				
-				// Now Execute the Script
-				system(FileName);
-				
-				// Remove the Script (as we no longer need it)
-				sprintf(tmp,"rm -r %s/berdp.sh","/boot/home/");
-				system(tmp);
+				// Execute RDesktop
+				system(cmdline.String());
 				
 				// Now Show it Again
 				Minimize(false);
