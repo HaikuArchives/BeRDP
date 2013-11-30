@@ -27,7 +27,6 @@ const uint32 RBN_XFULLSCREEN = 'rxfs';
 const uint32 RBN_XBEOS = 'rxfs';
 const uint32 RBN_XBEOSNATIVE = 'rxfs';
 
-const uint32 MENU_CONNECTION_ELLIPSIS = 'none';
 const uint32 MENU_NEW_CONNECTION = 'mncn';
 const uint32 MENU_CON_DELETE_CURRENT = 'mcdc';
 const uint32 MENU_CONNECTION_DEFAULT = 'mcdf';

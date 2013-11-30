@@ -128,7 +128,6 @@ void BeRDPWindow::InitWindow(void)
     DefaultIP.SetTo("Default"); // debug
     
     pmnConnection = new BPopUpMenu("", true, true);
-    pmnConnection->AddItem(new BMenuItem(" ... ", new BMessage(MENU_CONNECTION_ELLIPSIS)));
     pmnConnection->AddItem(new BMenuItem(DefaultIP.String(), new BMessage(MENU_CONNECTION_DEFAULT)));
     pmnConnection->AddSeparatorItem();
     pmnConnection->AddItem(new BMenuItem("New Connection", new BMessage(MENU_NEW_CONNECTION)));
@@ -512,17 +511,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				marked->SetMarked(true);
 			}
 			break;
-		case MENU_CONNECTION_ELLIPSIS:
-			{
-				// debug info for testing 
-				// this will eventually stored the last known config
-				txtComputer->SetText("61.88.23.139");
-				txtUsername->SetText("admin");
-				txtDomain->SetText("WENCK");
-				sldDisplaySize->SetValue(3);
-				chkForceBitmapUpdates->SetValue(B_CONTROL_ON);
-			}
-			break;		
 		case MENU_CONNECTION_DEFAULT:
 			{
 				// Set the Default Connections Settings
