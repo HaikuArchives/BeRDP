@@ -185,7 +185,7 @@ void BeRDPWindow::InitWindow(void)
     
     // Create Slider for Display
     sldDisplaySize = new BSlider(BRect (20,15,r.right - 20,30), "sldDisplaySize",
-      					"Full Screen", new BMessage (SLD_DISPLAYSIZE), 0, 3,
+      					"Full Screen", new BMessage (SLD_DISPLAYSIZE), 0, 5,
       					B_BLOCK_THUMB, B_FOLLOW_LEFT | B_FOLLOW_TOP,
 						B_FRAME_EVENTS|B_WILL_DRAW | B_NAVIGABLE);
 	sldDisplaySize->SetHashMarkCount(1);
@@ -216,9 +216,9 @@ void BeRDPWindow::InitWindow(void)
 	txvDescription->MakeEditable(true);
 	txvDescription->SetStylable(true);
 	txvDescription->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	txvDescription->Insert("BeRDP is a Remote Desktop Protocol Client which is used to connect to Microsoft Windows 2000/2003 Servers and Windows XP Professional workstations.\n\nThis version requires mmu_man\'s native rdesktop command line app. Respect!");
+	txvDescription->Insert("BeRDP is a GUI for RDesktop, which is used to connect to Microsoft Remote Desktop Protocol servers.\n");
       				
-    stvURL = new BStringView(BRect (fLeftMargin,153,r.right,168), "URL", "Web Site: http://berdp.sf.net/",
+    stvURL = new BStringView(BRect (fLeftMargin,153,r.right,168), "URL", "Website: https://github.com/HaikuArchives/BeRDP",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
     ptrAboutView->AddChild(stvAuthor1);
     ptrAboutView->AddChild(stvTitle);
@@ -394,8 +394,6 @@ void BeRDPWindow::SaveSettings(const char *cnxname)
 	msg.AddRect("windowframe",Frame());
 	msg.AddString("cnxname",cnxname);
 	
-	printf("Connection Name is %s\n\n",cnxname);
-	
 	// these will be moved to the function above shortly
 	//msg.AddString("txtComputer",txtComputer->Text());
 	//msg.AddString("txtUsername",txtUsername->Text());
@@ -420,27 +418,24 @@ void BeRDPWindow::UpdateDisplaySlider()
 	switch (sldDisplaySize->Value())
 	{
 		case 0:
-			{
-				sldDisplaySize->SetLabel("640 by 480 pixels");
-			}
+			sldDisplaySize->SetLabel("320 by 240 pixels");
 			break;
 		case 1:
-			{
-				sldDisplaySize->SetLabel("800 by 600 pixels");
-			}
+			sldDisplaySize->SetLabel("640 by 480 pixels");
 			break;
 		case 2:
-			{
-				sldDisplaySize->SetLabel("1024 by 768 pixels");
-			}
+			sldDisplaySize->SetLabel("800 by 600 pixels");
 			break;
 		case 3:
-			{
-				sldDisplaySize->SetLabel("Full Screen");
-			}
+			sldDisplaySize->SetLabel("1024 by 768 pixels");
+			break;
+		case 4:
+			sldDisplaySize->SetLabel("1280 by 720 pixels");
+			break;
+		case 5:
+			sldDisplaySize->SetLabel("Full Screen");
 			break;			
 	}
-	//printf("Slider Value: %d\n",sldDisplaySize->Value());
 }
 // -------------------------------------------------------------------------------------------------- //
 
@@ -473,26 +468,24 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				cmdline.SetTo("rdesktop ");
 				switch (sldDisplaySize->Value())
 				{
-					case 0:
-						{
-							cmdline.Append("-g 640x480 ");
-						}
-						break;
-					case 1:
-						{
-							cmdline.Append("-g 800x600 ");
-						}
-						break;
-					case 2:
-						{
-							cmdline.Append("-g 1024x768 ");
-						}
-						break;
-					case 3:
-						{
-							cmdline.Append("-f ");
-						}
-						break;			
+				case 0:
+					cmdline.Append("-g 320x240 ");
+					break;
+				case 1:
+					cmdline.Append("-g 640x480 ");
+					break;
+				case 2:
+					cmdline.Append("-g 800x600 ");
+					break;
+				case 3:
+					cmdline.Append("-g 1024x768 ");
+					break;
+				case 4:
+					cmdline.Append("-g 1280x720 ");
+					break;
+				case 5:
+					cmdline.Append("-f ");
+					break;			
 				}
 				
 				BString tmpUsername;
@@ -576,4 +569,3 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 	}
 }
 // -------------------------------------------------------------------------------------------------- //
-
