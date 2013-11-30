@@ -310,7 +310,6 @@ void BeRDPWindow::SaveConnectionList(void)
 	int TotalMenuItems, Counter, NumberOfConnections;
 	
 	TotalMenuItems = pmnConnection->CountItems();
-	printf("Number of Items: %d\n",TotalMenuItems); // debug
 	
 	if (TotalMenuItems > 5) {
 		NumberOfConnections =  TotalMenuItems - 5;
@@ -319,7 +318,6 @@ void BeRDPWindow::SaveConnectionList(void)
 		Counter=0;
 		while(Counter<TotalMenuItems) {
 			OneItem.SetTo(pmnConnection->ItemAt(Counter)->Label());
-			printf ("Item #%d - %s\n",Counter,OneItem.String()); // debug
 			Counter++;
 		}
 		// Save Connection List
@@ -357,17 +355,12 @@ void BeRDPWindow::SaveConnectionDetails(const char *cnxname)
 		cnxfilename.SetTo(path.Path());
 		cnxfilename.Append("/BeRDP");
 		BEntry entry(cnxfilename.String());
-		if (entry.Exists() == true) {
-			printf("BeRDP Directory Exists.\n");
-		} else {
-			printf("BeRDP Directory does not exist.\n");
+		if (entry.Exists() == false) {
 			// Create Directory
 			path.SetTo(cnxfilename.String());
 			err = create_directory(path.Path(),777);
-			if (result == B_OK) {
-				printf("Directory Created - %d\n",err);
-			} else {
-				printf("Sorry - Could not Create Directory &i\n",err);
+			if (result != B_OK) {
+				printf("Couldn't create directory &i\n",err);
 			}
 		}
 		cnxfilename.Append("/");
@@ -378,7 +371,6 @@ void BeRDPWindow::SaveConnectionDetails(const char *cnxname)
 		//CurrentItem = conmenufield->FindMarked();
 		//printf("Save Connection Details Filename: %s / Total Items: %d\n\n",CurrentItem->Label(),
 		//	conmenufield->CountItems());
-		printf("Save Connection Details Filename: %s\n\n",cnxfilename.String());
 		path.SetTo(cnxfilename.String());
 		BFile file(path.Path(),B_READ_WRITE | B_CREATE_FILE | B_ERASE_FILE);
 		msg.Flatten(&file);
@@ -450,7 +442,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 	CurrentItem = pmnConnection->FindMarked();
 	index = pmnConnection->IndexOf(CurrentItem);
 	if (index > -1) {
-		printf("CurrentItem - %s // index - %d\n\n",CurrentItem->Label(),index); // debug
 		cnxname.SetTo(pmnConnection->ItemAt(index)->Label()); // debug
 	} else {
 		cnxname.SetTo("");
@@ -502,7 +493,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 					cmdline.Append("-b ");
 				}
 				cmdline.Append(txtComputer->Text());
-				printf("%s\n\n",cmdline.String());
 
 				// Minimize the Window
 				Minimize(true);
@@ -536,7 +526,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 		case MENU_CONNECTION_DEFAULT:
 			{
 				// Set the Default Connections Settings
-				printf("Set Default Settings\n\n");
 				txtComputer->SetText("");
 				txtUsername->SetText("");
 				txtPassword->SetText("");
@@ -553,7 +542,6 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				//BString cnxname;
 				// debug - should be the current selected item
 				//cnxname.SetTo(conmenufield->ItemAt(conmenufield->CountItems())->Label()); // debug
-				printf("Closing ... Connection Name is %s\n\n",cnxname.String());
 				SaveSettings(cnxname.String());
 				Quit();
 			}
