@@ -1,3 +1,18 @@
+resource app_signature "application/x-vnd.BeRDP";
+
+resource app_version {
+	major  = 0,
+	middle = 0,
+	minor  = 16777216,
+
+	variety = B_APPV_DEVELOPMENT,
+	internal = 0,
+
+	short_info = "BeRDP",
+	long_info = "GUI Front End for rdesktop / xwin (at present)"
+};
+
+resource app_flags B_SINGLE_LAUNCH;
 
 resource mini_icon array {
 	$"FFFF0000FFFF0000FFFFFFFFFFFFFFFF"
@@ -52,19 +67,3 @@ resource large_icon array {
 	$"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000016150F00111111FFFFFFFFFFFF"
 	$"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000111111FFFFFFFFFFFFFF"
 };
-
-resource app_signature "application/x-vnd.BeRDP";
-
-resource app_version {
-	major  = 0,
-	middle = 0,
-	minor  = 16777216,
-
-	variety = B_APPV_DEVELOPMENT,
-	internal = 0,
-
-	short_info = "BeRDP",
-	long_info = "GUI Front End for rdesktop / xwin (at present)"
-};
-
-resource app_flags B_SINGLE_LAUNCH;
