@@ -35,8 +35,8 @@ Author: Sikosis (phil@sikosis.com)
 #include <TextControl.h>
 #include <Window.h>
 #include <View.h>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 
 #include "BeRDP.h"
 #include "BeRDPWindows.h"
@@ -265,8 +265,8 @@ void BeRDPWindow::LoadSettings(BMessage *msg)
 	BString   tmpP;
 	BString   tmpD;
 	BString   tmpWSP;
-	long 	  FBU;
-	long      slide;
+	int32_t   FBU;
+	int32_t   slide;
 
 	if (B_OK == msg->FindRect("windowframe",&frame)) {
 		MoveTo(frame.left,frame.top);

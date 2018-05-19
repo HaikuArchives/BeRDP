@@ -22,7 +22,7 @@ SRCS= BeRDP.cpp BeRDPWindows.cpp BeRDPViews.cpp
 RDEFS= BeRDP.rdef
 
 #	specify additional libraries to link against
-LIBS= be root
+LIBS= be $(STDCPPLIBS)
 
 #	specify additional paths to directories 
 LIBPATHS=
