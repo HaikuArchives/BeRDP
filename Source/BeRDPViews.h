@@ -1,12 +1,12 @@
 /*
-
-BeRDP Views Header
-
-Author: BeRDP
-
-(C)2003 Created using BRIE (http://brie.sf.net/)
-
-*/
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
 #ifndef __BeRDPVIEWS_H__
 #define __BeRDPVIEWS_H__

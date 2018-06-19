@@ -1,12 +1,12 @@
 /*
-
-BeRDP Constants
-
-Author: Sikosis 
-
-(C)2003-2004 BeRDP Team (http://berdp.sf.net/)
-
-*/
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
 #ifndef __BeRDPCONSTANTS_H__
 #define __BeRDPCONSTANTS_H__

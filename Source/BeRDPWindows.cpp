@@ -1,12 +1,12 @@
 /*
-
-BeRDPWindow
-
-Author: Sikosis (phil@sikosis.com)
-
-(C)2003-2004 Shell Created using BRIE (http://brie.sf.net/)
-
-*/
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
 // Includes ------------------------------------------------------------------------------------------ //
 #include <Alert.h>

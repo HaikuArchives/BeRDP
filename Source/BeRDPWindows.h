@@ -1,12 +1,12 @@
 /*
-
-BeRDP Windows Header
-
-Author: Sikosis (phil@sikosis.com)
-
-(C)2003-2004 Created using BRIE (http://brie.sf.net/)
-
-*/
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
 #ifndef __BeRDPWINDOWS_H__
 #define __BeRDPWINDOWS_H__

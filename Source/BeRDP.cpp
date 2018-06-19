@@ -1,12 +1,13 @@
 /*
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
-BeRDP
-
-Author: BeRDP
-
-(C)2003
-
-*/
 
 // Includes ------------------------------------------------------------------------------------------ //
 #include <Application.h>
