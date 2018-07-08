@@ -1,12 +1,12 @@
 /*
-
-BeRDP Windows Header
-
-Author: Sikosis (phil@sikosis.com)
-
-(C)2003-2004 Created using BRIE (http://brie.sf.net/)
-
-*/
+ * Copyright 2003-2018. All rights reserved.
+ * Distributed under the terms of the BSD license.
+ *
+ * Author:
+ *	Sikosis, phil@sikosis.com
+ *
+ * BeRDP is a GUI for RDesktop
+ */
 
 #ifndef __BeRDPWINDOWS_H__
 #define __BeRDPWINDOWS_H__
@@ -40,7 +40,7 @@ class BeRDPWindow : public BWindow
 		virtual bool QuitRequested();
 		virtual void MessageReceived(BMessage *message);
 		virtual void UpdateDisplaySlider();
-		
+
 	private:
 		void InitWindow(void);
 
@@ -49,12 +49,12 @@ class BeRDPWindow : public BWindow
 		void LoadConnectionList(BMessage *msg);
 		void SaveConnectionList(void);
 		void SaveConnectionDetails(const char *cnxname);
-		
+
 		BeRDPView*		ptrBeRDPView;
 		GeneralView*    ptrGeneralView;
 		DisplayView*	ptrDisplayView;
 		AboutView*		ptrAboutView;
-		
+
 		BTabView		*tabView;
 	    BTab			*tab;
 	    BButton         *btnConnect;
@@ -63,7 +63,7 @@ class BeRDPWindow : public BWindow
 	    BSlider         *sldDisplaySize;
 	    BTextControl    *txtComputer;
 	    BTextControl    *txtUsername;
-	    BTextControl    *txtPassword; // I dont like to use this Password param 
+	    BTextControl    *txtPassword; // I dont like to use this Password param
 	    BTextControl    *txtDomain;   // (so it'll be greyed out)
 	    BStringView     *stvTitle;
 	    BStringView     *stvAuthor1;
