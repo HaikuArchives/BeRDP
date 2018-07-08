@@ -64,7 +64,7 @@ BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP", B_TITLED_WINDOW
 	InitWindow();
 	CenterWindowOnScreen(this);
 
-	// Load User Settings 
+	// Load User Settings
 	BPath path;
 	find_directory(B_USER_SETTINGS_DIRECTORY,&path);
 	path.Append("BeRDP/BeRDP_Settings",true);
@@ -72,13 +72,13 @@ BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP", B_TITLED_WINDOW
 	BMessage msg;
 	msg.Unflatten(&file);
 	LoadSettings (&msg);
-    
+
     // Set Window Limits
 	SetSizeLimits(315,315,205,230);
-    
+
     // Update from our Loaded Settings
     UpdateDisplaySlider();
-    
+
 	Show();
 }
 // -------------------------------------------------------------------------------------------------- //
@@ -104,29 +104,29 @@ void BeRDPWindow::InitWindow(void)
     rlist.left += 12;
     rlist.right -= 12;
     rlist.bottom -= 12;
-    
+
     // Create Views for our Tabs
     ptrGeneralView = new GeneralView(r);
     ptrDisplayView = new DisplayView(r);
     ptrAboutView = new AboutView(r);
-    
+
     // Create the Buttons for GeneralView
-	btnConnect = new BButton(BRect (133,150,213,180), 
+	btnConnect = new BButton(BRect (133,150,213,180),
 					"btnConnect","Connect", new BMessage(BTN_CONNECT),
 					B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
 	btnConnect->MakeDefault(true);
-	btnConnect->MakeFocus(true);					
-	btnClose = new BButton(BRect (225,150,305,180), 
+	btnConnect->MakeFocus(true);
+	btnClose = new BButton(BRect (225,150,305,180),
 					"btnClose","Close", new BMessage(BTN_CLOSE),
-					B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);	
+					B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
 	ptrGeneralView->AddChild(btnConnect);
     ptrGeneralView->AddChild(btnClose);
-    
-    
+
+
     // Create Connection Menu for GeneralView
     BString DefaultIP;
     DefaultIP.SetTo("Default"); // debug
-    
+
     pmnConnection = new BPopUpMenu("", true, true);
     pmnConnection->AddItem(new BMenuItem(DefaultIP.String(), new BMessage(MENU_CONNECTION_DEFAULT)));
     pmnConnection->AddSeparatorItem();
@@ -138,7 +138,7 @@ void BeRDPWindow::InitWindow(void)
 	mnfConnection->SetDivider(110);
 	mnfConnection->SetFont(be_bold_font);
 	mnfConnection->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	
+
     /*conmenufield = new BMenu(" ... ");
     conmenufield->AddItem(new BMenuItem(DefaultIP.String(), new BMessage(MENU_CONNECTION_DEFAULT)));
     conmenufield->AddSeparatorItem();
@@ -146,10 +146,10 @@ void BeRDPWindow::InitWindow(void)
     conmenufield->AddItem(menucondelete = new BMenuItem("Delete Current", new BMessage(MENU_CON_DELETE_CURRENT)));
     menucondelete->SetEnabled(false);
     connectionmenufield = new BMenuField(BRect (5,25,220,40),"connection_menu","Connection Name:",conmenufield,B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
-    connectionmenufield->SetDivider(110);	
+    connectionmenufield->SetDivider(110);
     connectionmenufield->SetFont(be_bold_font);
     connectionmenufield->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));*/
-    
+
     // Create TextControls for GeneralView
     txtComputer = new BTextControl(BRect (30,50,220,65), "txtComputer",
       					"Computer: ", "", new BMessage (TXT_COMPUTER),
@@ -158,14 +158,14 @@ void BeRDPWindow::InitWindow(void)
 	txtUsername = new BTextControl(BRect (30,75,250,90), "txtUsername",
       					"Username: ", "", new BMessage (TXT_USERNAME),
 						B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
-	txtUsername->SetDivider(55);					
-    
+	txtUsername->SetDivider(55);
+
     txtPassword = new BTextControl(BRect (30,100,250,115), "txtPassword",
       					"Password: ", "", new BMessage (TXT_PASSWORD),
 						B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
-	txtPassword->SetDivider(55);					
+	txtPassword->SetDivider(55);
     txtPassword->SetEnabled(false);
-    
+
     txtDomain = new BTextControl(BRect (30,125,250,140), "txtDomain",
       					"Domain: ", "", new BMessage (TXT_DOMAIN),
 						B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
@@ -173,32 +173,32 @@ void BeRDPWindow::InitWindow(void)
 
 	ptrGeneralView->AddChild(mnfConnection);
 	ptrGeneralView->AddChild(txtComputer);
-	ptrGeneralView->AddChild(txtUsername);					
-    ptrGeneralView->AddChild(txtPassword);					
+	ptrGeneralView->AddChild(txtUsername);
+    ptrGeneralView->AddChild(txtPassword);
     ptrGeneralView->AddChild(txtDomain);
-    
+
     // Create CheckBox for Display
     chkForceBitmapUpdates = new BCheckBox(BRect (30,69,300,79), "chkForceBitmapUpdates",
       					"Force Bitmap Updates", new BMessage (CHK_FORCE_BITMAP_UPDATES),
       					B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
-    
+
     // Create Slider for Display
     sldDisplaySize = new BSlider(BRect (20,15,r.right - 20,30), "sldDisplaySize",
       					"Full Screen", new BMessage (SLD_DISPLAYSIZE), 0, 5,
       					B_BLOCK_THUMB, B_FOLLOW_LEFT | B_FOLLOW_TOP,
 						B_FRAME_EVENTS|B_WILL_DRAW | B_NAVIGABLE);
 	sldDisplaySize->SetHashMarkCount(1);
-	sldDisplaySize->SetKeyIncrementValue(1);					
+	sldDisplaySize->SetKeyIncrementValue(1);
     sldDisplaySize->SetHashMarks(B_HASH_MARKS_BOTH);
     sldDisplaySize->SetLimitLabels("Less", "More");
-    sldDisplaySize->SetValue(3);  
-    
+    sldDisplaySize->SetValue(3);
+
    // int wsleft = 175;
-    
+
     // Add them all to Display Tab
     ptrDisplayView->AddChild(sldDisplaySize);
     ptrDisplayView->AddChild(chkForceBitmapUpdates);
-          
+
     // Create StringViews for AboutView
     float fLeftMargin = 8;
     float fRightMargin = 310;
@@ -207,8 +207,8 @@ void BeRDPWindow::InitWindow(void)
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
     stvAuthor1 = new BStringView(BRect (fLeftMargin,30,fRightMargin,45), "Author 1", "(C) 2003-2004 Sikosis",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
-      				
-    
+
+
 	txvDescription = new BTextView(BRect(fLeftMargin, fDescTop, fRightMargin, fDescTop+80),
 						 "Description", BRect(0,0,fRightMargin-fLeftMargin,80), B_FOLLOW_ALL_SIDES, B_WILL_DRAW);
 	txvDescription->SetWordWrap(true);
@@ -216,14 +216,14 @@ void BeRDPWindow::InitWindow(void)
 	txvDescription->SetStylable(true);
 	txvDescription->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	txvDescription->Insert("BeRDP is a GUI for RDesktop, which is used to connect to Microsoft Remote Desktop Protocol servers.\n");
-      				
+
     stvURL = new BStringView(BRect (fLeftMargin,153,r.right,168), "URL", "Website: github.com/HaikuArchives/BeRDP",
       				B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW);
     ptrAboutView->AddChild(stvAuthor1);
     ptrAboutView->AddChild(stvTitle);
-    ptrAboutView->AddChild(txvDescription); 
-    ptrAboutView->AddChild(stvURL); 				
-        
+    ptrAboutView->AddChild(txvDescription);
+    ptrAboutView->AddChild(stvURL);
+
 	// Create the TabView and Tabs
 	tabView = new BTabView(rtab,"berdp_tabview");
 	tabView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -238,7 +238,7 @@ void BeRDPWindow::InitWindow(void)
 	tab = new BTab();
 	tabView->AddTab(ptrAboutView, tab);
 	tab->SetLabel("About");
-	
+
 	// Create the Views
 	AddChild(ptrBeRDPView = new BeRDPView(r));
 	ptrBeRDPView->AddChild(tabView);
@@ -272,32 +272,32 @@ void BeRDPWindow::LoadSettings(BMessage *msg)
 		MoveTo(frame.left,frame.top);
 		ResizeTo(frame.right-frame.left,frame.bottom-frame.top);
 	}
-	
+
 	if (B_OK == msg->FindString("txtComputer",&tmpC)) {
 		txtComputer->SetText(tmpC.String());
 	}
-	
+
 	if (B_OK == msg->FindString("txtUsername",&tmpU)) {
 		txtUsername->SetText(tmpU.String());
 	}
-	
+
 	if (B_OK == msg->FindString("txtPassword",&tmpP)) {
 		txtPassword->SetText(tmpP.String());
 	}
-	
+
 	if (B_OK == msg->FindString("txtDomain",&tmpD)) {
 		txtDomain->SetText(tmpD.String());
 	}
-	
+
 	if (B_OK == msg->FindInt32("chkForceBitmapUpdates",&FBU)) {
 		if (&FBU != 0) {
 			chkForceBitmapUpdates->SetValue(FBU);
-    	}	
+    	}
 	}
 	if (B_OK == msg->FindInt32("sldDisplaySize",&slide)) {
 		sldDisplaySize->SetValue(slide);
 	}
-	
+
 }
 // -------------------------------------------------------------------------------------------------- //
 
@@ -307,9 +307,9 @@ void BeRDPWindow::SaveConnectionList(void)
 {
 	BMessage msg;
 	int TotalMenuItems, Counter, NumberOfConnections;
-	
+
 	TotalMenuItems = pmnConnection->CountItems();
-	
+
 	if (TotalMenuItems > 5) {
 		NumberOfConnections =  TotalMenuItems - 5;
 		msg.AddInt32("NumberOfConnections",NumberOfConnections);
@@ -344,7 +344,7 @@ void BeRDPWindow::SaveConnectionDetails(const char *cnxname)
 	msg.AddString("txtDomain",txtDomain->Text());
 	msg.AddInt32("chkForceBitmapUpdates",chkForceBitmapUpdates->Value());
 	msg.AddInt32("sldDisplaySize",sldDisplaySize->Value());
-	
+
 	BPath path;
 	status_t result = find_directory(B_USER_SETTINGS_DIRECTORY,&path);
 	if (result == B_OK) {
@@ -365,7 +365,7 @@ void BeRDPWindow::SaveConnectionDetails(const char *cnxname)
 		cnxfilename.Append("/");
 		cnxfilename.Append(cnxname);
 		cnxfilename.Append(".berdp");
-		
+
 		//BMenuItem *CurrentItem = new BMenuItem(conmenufield);
 		//CurrentItem = conmenufield->FindMarked();
 		//printf("Save Connection Details Filename: %s / Total Items: %d\n\n",CurrentItem->Label(),
@@ -384,7 +384,7 @@ void BeRDPWindow::SaveSettings(const char *cnxname)
 	BMessage msg;
 	msg.AddRect("windowframe",Frame());
 	msg.AddString("cnxname",cnxname);
-	
+
 	// these will be moved to the function above shortly
 	//msg.AddString("txtComputer",txtComputer->Text());
 	//msg.AddString("txtUsername",txtUsername->Text());
@@ -392,7 +392,7 @@ void BeRDPWindow::SaveSettings(const char *cnxname)
 	//msg.AddString("txtDomain",txtDomain->Text());
 	//msg.AddInt32("chkForceBitmapUpdates",chkForceBitmapUpdates->Value());
 	//msg.AddInt32("sldDisplaySize",sldDisplaySize->Value());
-	
+
 	BPath path;
 	status_t result = find_directory(B_USER_SETTINGS_DIRECTORY,&path);
 	if (result == B_OK) {
@@ -425,7 +425,7 @@ void BeRDPWindow::UpdateDisplaySlider()
 			break;
 		case 5:
 			sldDisplaySize->SetLabel("Full Screen");
-			break;			
+			break;
 	}
 }
 // -------------------------------------------------------------------------------------------------- //
@@ -444,8 +444,8 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 		cnxname.SetTo(pmnConnection->ItemAt(index)->Label()); // debug
 	} else {
 		cnxname.SetTo("");
-	}	
-	
+	}
+
 	switch(message->what)
 	{
 		case BTN_CONNECT:
@@ -453,7 +453,7 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				SaveConnectionDetails(cnxname.String()); // debug
 				SaveConnectionList();
 				SaveSettings(cnxname.String());
-				
+
 				BString cmdline;
 				cmdline.SetTo("rdesktop ");
 				switch (sldDisplaySize->Value())
@@ -475,9 +475,9 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 					break;
 				case 5:
 					cmdline.Append("-f ");
-					break;			
+					break;
 				}
-				
+
 				BString tmpUsername;
 				tmpUsername.SetTo(txtUsername->Text());
 				if (tmpUsername.CountChars() > 0) {
@@ -495,10 +495,10 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 
 				// Minimize the Window
 				Minimize(true);
-				
+
 				// Execute RDesktop
 				system(cmdline.String());
-				
+
 				// Now Show it Again
 				Minimize(false);
 			}
@@ -506,7 +506,7 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 		case MENU_NEW_CONNECTION:
 			{
 				// Launch Window - Maybe my InputBox Class ?
-				
+
 				BMenuItem *marked = pmnConnection->FindItem("New Connection");
 				marked->SetMarked(true);
 			}
@@ -520,7 +520,7 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				txtDomain->SetText("");
 				sldDisplaySize->SetValue(3);
 				chkForceBitmapUpdates->SetValue(B_CONTROL_OFF);
-				
+
 				BMenuItem *marked = pmnConnection->FindItem("Default");
 				marked->SetMarked(true);
 			}
@@ -538,7 +538,7 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 			{
 				UpdateDisplaySlider();
 			}
-			break;		
+			break;
 		default:
 			BWindow::MessageReceived(message);
 			break;

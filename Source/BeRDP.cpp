@@ -49,7 +49,7 @@ void BeRDP::MessageReceived (BMessage *message)
 	switch(message->what)
 	{
 		default:
-			BApplication::MessageReceived(message); // pass it along ... 
+			BApplication::MessageReceived(message); // pass it along ...
 			break;
 	}
 }
