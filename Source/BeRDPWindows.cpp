@@ -8,7 +8,6 @@
  * BeRDP is a GUI for RDesktop
  */
 
-// Includes ------------------------------------------------------------------------------------------ //
 #include <Alert.h>
 #include <Application.h>
 #include <Button.h>
@@ -42,8 +41,6 @@
 #include "BeRDPWindows.h"
 #include "BeRDPViews.h"
 #include "BeRDPConstants.h"
-// -------------------------------------------------------------------------------------------------- //
-
 
 
 // CenterWindowOnScreen -- Centers the BWindow to the Current Screen
@@ -56,7 +53,7 @@ static void CenterWindowOnScreen(BWindow* w)
 	if (screenFrame.Contains(pt))
 		w->MoveTo(pt);
 }
-// -------------------------------------------------------------------------------------------------- //
+
 
 // BeRDPWindow - Constructor
 BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP", B_TITLED_WINDOW, B_NORMAL_WINDOW_FEEL , 0)
@@ -81,14 +78,14 @@ BeRDPWindow::BeRDPWindow(BRect frame) : BWindow (frame, "BeRDP", B_TITLED_WINDOW
 
 	Show();
 }
-// -------------------------------------------------------------------------------------------------- //
+
 
 // BeRDPWindow - Destructor
 BeRDPWindow::~BeRDPWindow()
 {
 	exit(0);
 }
-// -------------------------------------------------------------------------------------------------- //
+
 
 // BeRDPWindow::InitWindow -- Initialization Commands here
 void BeRDPWindow::InitWindow(void)
@@ -139,17 +136,6 @@ void BeRDPWindow::InitWindow(void)
 	mnfConnection->SetFont(be_bold_font);
 	mnfConnection->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-    /*conmenufield = new BMenu(" ... ");
-    conmenufield->AddItem(new BMenuItem(DefaultIP.String(), new BMessage(MENU_CONNECTION_DEFAULT)));
-    conmenufield->AddSeparatorItem();
-    conmenufield->AddItem(new BMenuItem("New Connection", new BMessage(MENU_NEW_CONNECTION)));
-    conmenufield->AddItem(menucondelete = new BMenuItem("Delete Current", new BMessage(MENU_CON_DELETE_CURRENT)));
-    menucondelete->SetEnabled(false);
-    connectionmenufield = new BMenuField(BRect (5,25,220,40),"connection_menu","Connection Name:",conmenufield,B_FOLLOW_LEFT | B_FOLLOW_TOP, B_WILL_DRAW | B_NAVIGABLE);
-    connectionmenufield->SetDivider(110);
-    connectionmenufield->SetFont(be_bold_font);
-    connectionmenufield->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));*/
-
     // Create TextControls for GeneralView
     txtComputer = new BTextControl(BRect (30,50,220,65), "txtComputer",
       					"Computer: ", "", new BMessage (TXT_COMPUTER),
@@ -192,8 +178,6 @@ void BeRDPWindow::InitWindow(void)
     sldDisplaySize->SetHashMarks(B_HASH_MARKS_BOTH);
     sldDisplaySize->SetLimitLabels("Less", "More");
     sldDisplaySize->SetValue(3);
-
-   // int wsleft = 175;
 
     // Add them all to Display Tab
     ptrDisplayView->AddChild(sldDisplaySize);
@@ -243,7 +227,6 @@ void BeRDPWindow::InitWindow(void)
 	AddChild(ptrBeRDPView = new BeRDPView(r));
 	ptrBeRDPView->AddChild(tabView);
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::QuitRequested -- Post a message to the app to quit
@@ -253,7 +236,6 @@ bool BeRDPWindow::QuitRequested()
 	be_app->PostMessage(B_QUIT_REQUESTED);
 	return true;
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::LoadSettings -- Loads your current settings
@@ -299,7 +281,6 @@ void BeRDPWindow::LoadSettings(BMessage *msg)
 	}
 
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::SaveConnectionList -- Saves the List of Conection Names from conmenufield
@@ -331,7 +312,6 @@ void BeRDPWindow::SaveConnectionList(void)
 		// Default Connection List - No Need to Save
 	}
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::SaveConnectionDetails -- Saves the Users settings
@@ -366,16 +346,11 @@ void BeRDPWindow::SaveConnectionDetails(const char *cnxname)
 		cnxfilename.Append(cnxname);
 		cnxfilename.Append(".berdp");
 
-		//BMenuItem *CurrentItem = new BMenuItem(conmenufield);
-		//CurrentItem = conmenufield->FindMarked();
-		//printf("Save Connection Details Filename: %s / Total Items: %d\n\n",CurrentItem->Label(),
-		//	conmenufield->CountItems());
 		path.SetTo(cnxfilename.String());
 		BFile file(path.Path(),B_READ_WRITE | B_CREATE_FILE | B_ERASE_FILE);
 		msg.Flatten(&file);
 	}
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::SaveSettings -- Saves the Users settings
@@ -385,14 +360,6 @@ void BeRDPWindow::SaveSettings(const char *cnxname)
 	msg.AddRect("windowframe",Frame());
 	msg.AddString("cnxname",cnxname);
 
-	// these will be moved to the function above shortly
-	//msg.AddString("txtComputer",txtComputer->Text());
-	//msg.AddString("txtUsername",txtUsername->Text());
-	//msg.AddString("txtPassword",txtPassword->Text());
-	//msg.AddString("txtDomain",txtDomain->Text());
-	//msg.AddInt32("chkForceBitmapUpdates",chkForceBitmapUpdates->Value());
-	//msg.AddInt32("sldDisplaySize",sldDisplaySize->Value());
-
 	BPath path;
 	status_t result = find_directory(B_USER_SETTINGS_DIRECTORY,&path);
 	if (result == B_OK) {
@@ -401,7 +368,6 @@ void BeRDPWindow::SaveSettings(const char *cnxname)
 		msg.Flatten(&file);
 	}
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 void BeRDPWindow::UpdateDisplaySlider()
@@ -428,7 +394,6 @@ void BeRDPWindow::UpdateDisplaySlider()
 			break;
 	}
 }
-// -------------------------------------------------------------------------------------------------- //
 
 
 // BeRDPWindow::MessageReceived -- receives messages
@@ -544,4 +509,3 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 			break;
 	}
 }
-// -------------------------------------------------------------------------------------------------- //

@@ -47,6 +47,3 @@ class AboutView : public BView
 };
 
 #endif
-
-
-

@@ -8,8 +8,6 @@
  * BeRDP is a GUI for RDesktop
  */
 
-
-// Includes ------------------------------------------------------------------------------------------ //
 #include <Application.h>
 #include <Screen.h>
 #include <Window.h>
@@ -19,19 +17,17 @@
 #include "BeRDPWindows.h"
 #include "BeRDPViews.h"
 #include "BeRDPConstants.h"
-// Constants ---------------------------------------------------------------------------------------- //
 
 const char *APP_SIGNATURE = "application/x-vnd.BeRDP";  // Application Signature
 
-// -------------------------------------------------------------------------------------------------- //
-
 BeRDPWindow		*ptrBeRDPWindow;
+
 
 // BeRDP - Constructor
 BeRDP::BeRDP() : BApplication (APP_SIGNATURE)
 {
 	// Default Window Size - Position doesn't matter as we centre the form to the current screen size
-	//BRect	screenFrame = (BScreen(B_MAIN_SCREEN_ID).Frame());
+	// BRect	screenFrame = (BScreen(B_MAIN_SCREEN_ID).Frame());
 
 	float FormTopDefault = 0;
 	float FormLeftDefault = 0;
@@ -41,7 +37,7 @@ BeRDP::BeRDP() : BApplication (APP_SIGNATURE)
 
 	ptrBeRDPWindow = new BeRDPWindow(BeRDPWindowRect);
 }
-// ------------------------------------------------------------------------------------------------- //
+
 
 // BeRDP::MessageReceived -- handles incoming messages
 void BeRDP::MessageReceived (BMessage *message)
@@ -53,7 +49,7 @@ void BeRDP::MessageReceived (BMessage *message)
 			break;
 	}
 }
-// ------------------------------------------------------------------------------------------------- //
+
 
 // BeRDP Main
 int main(void)
@@ -62,5 +58,3 @@ int main(void)
 	theApp.Run();
 	return 0;
 }
-// end --------------------------------------------------------------------------------------------- //
-
