@@ -446,13 +446,17 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 				BString tmpUsername;
 				tmpUsername.SetTo(txtUsername->Text());
 				if (tmpUsername.CountChars() > 0) {
-					cmdline.Append("-u");
+					cmdline.Append("-u ");
 					cmdline.Append(txtUsername->Text());
 					cmdline.Append(" ");
 				}
-				cmdline.Append("-d");
-				cmdline.Append(txtDomain->Text());
-				cmdline.Append(" ");
+
+				if(!txtDomain->Text()[0] == '\0'){
+					cmdline.Append("-d ");
+					cmdline.Append(txtDomain->Text());
+					cmdline.Append(" ");
+				}
+
 				if (chkForceBitmapUpdates->Value() == B_CONTROL_ON) {
 					cmdline.Append("-b ");
 				}
@@ -492,9 +496,9 @@ void BeRDPWindow::MessageReceived (BMessage *message)
 			break;
 		case BTN_CLOSE:
 			{
-				//BString cnxname;
+				// BString cnxname;
 				// debug - should be the current selected item
-				//cnxname.SetTo(conmenufield->ItemAt(conmenufield->CountItems())->Label()); // debug
+				// cnxname.SetTo(conmenufield->ItemAt(conmenufield->CountItems())->Label()); // debug
 				SaveSettings(cnxname.String());
 				Quit();
 			}
