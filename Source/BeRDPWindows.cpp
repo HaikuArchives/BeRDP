@@ -247,8 +247,8 @@ void BeRDPWindow::LoadSettings(BMessage *msg)
 	BString   tmpP;
 	BString   tmpD;
 	BString   tmpWSP;
-	long int   FBU;
-	long int   slide;
+	int32   FBU;
+	int32   slide;
 
 	if (B_OK == msg->FindRect("windowframe",&frame)) {
 		MoveTo(frame.left,frame.top);
